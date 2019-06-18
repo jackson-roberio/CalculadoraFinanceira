@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Calculadora Financeira</string>
+
+    <!--Activity Principal-->
+    <string name="ap_topico">Informe os dados para calculo fiscais</string>
+    <string name="ap_salario_bruto">Salário Bruto</string>
+    <string name="ap_salario_liquido">Salário Líquido</string>
+    <string name="ap_rs">R$</string>
+    <string name="ap_dependentes">Dependente(s)</string>
+    <string name="ap_qtd_dependentes">Quantidade de dependentes</string>
+    <string name="ap_info_pagamento">Detalhes do pagamento</string>
+    <string name="ap_alq_inss">Alíquota INSS</string>
+    <string name="ap_base_inss">Base INSS</string>
+    <string name="ap_valor_inss">Valor INSS</string>
+    <string name="ap_base_irpf">Base IRPF</string>
+    <string name="ap_alq_irpf">Alíquota IRPF</string>
+    <string name="ap_deducao_irpf">Dedução IRPF</string>
+    <string name="ap_vl_irpf">Valor IRPF</string>
+    <string name="c"></string>
+</resources>
