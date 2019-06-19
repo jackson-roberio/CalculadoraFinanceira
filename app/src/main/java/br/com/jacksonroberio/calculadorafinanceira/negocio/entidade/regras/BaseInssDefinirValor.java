@@ -8,9 +8,9 @@ package br.com.jacksonroberio.calculadorafinanceira.negocio.entidade.regras;
  **/
 public class BaseInssDefinirValor {
 
-    private static final double LIMITE_INSS = 5839.45;
+    private static final float LIMITE_INSS = 5839.45f;
 
-    public static double calcular(double salario){
+    public static float calcular(float salario){
         if (salario > LIMITE_INSS)
             return LIMITE_INSS;
         else

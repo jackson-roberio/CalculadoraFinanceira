@@ -23,19 +23,32 @@ public class ContraCheque {
     }
 
 
+    private String transformarString(float valor){
+        return String.format("%.02f", valor);
+    }
+
+
     /**
      * Getters & Setters
      **/
     //Podendo ser 8%, 9% ou 11%
-    public double getAlicotaInss() {
+    public float getAlicotaInss() {
         return AliquotaInssDefinirPorcentagem.calcularPorcentgagem(getSalarioBruto());
+    }
+
+    public String getAlicotaInssString(){
+        return transformarString(getAlicotaInss()) + "%";
     }
 
     /***
      * Podendo ser o próprio salaário ou o topo do INSS
      */
-    public double getBaseInss() {
+    public float getBaseInss() {
         return BaseInssDefinirValor.calcular(getSalarioBruto());
+    }
+
+    public String getBaseInssString(){
+        return "R$ " +transformarString(getBaseInss());
     }
 
     /**
@@ -43,12 +56,17 @@ public class ContraCheque {
      *
      * É o multiplicação da alicaota do INSS e da base do INSS.
      **/
-    public double getInss() {
+    public float getInss() {
         return getAlicotaInss() * getBaseInss();
     }
 
-    public  double getBaseIRPF(){
-        return getSalarioBruto() - getInss() - (trabalhador.getDependentes() * 189.59);
+    public String getInssString(){
+        return "R$ " + transformarString(getInss());
+    }
+
+
+    public  float getBaseIRPF(){
+        return getSalarioBruto() - getInss() - (trabalhador.getDependentes() * 189.59f);
     }
 
     public double getAliquotaIRPF(){
@@ -58,7 +76,7 @@ public class ContraCheque {
     /**
      * @return o salário bruto, de acordo com o definido no objeto {@link Trabalhador}
      **/
-    public double getSalarioBruto(){
+    public float getSalarioBruto(){
         return this.trabalhador.getSalario();
     }
 

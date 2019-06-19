@@ -5,9 +5,9 @@ package br.com.jacksonroberio.calculadorafinanceira.negocio.entidade.regras;
 */
 public class AliquotaInssDefinirPorcentagem {
 
-    private static final double OITO_PORCENTO = 1751.82;
+    private static final float OITO_PORCENTO = 1751.82f;
 
-    private static final double ONZE_PORCENTO = 2919.72;
+    private static final float ONZE_PORCENTO = 2919.72f;
 
 
     /**
@@ -18,8 +18,8 @@ public class AliquotaInssDefinirPorcentagem {
      * 9% = se o salálrio ficar entre R$ 1751,81 e R$ 2919,72;
      * 11%  = se o salário for superior à {@value ONZE_PORCENTO}
      **/
-    public static double calcularPorcentgagem(double salario){
-        double resultado;
+    public static float calcularPorcentgagem(float salario){
+        float resultado;
 
         if(salario < OITO_PORCENTO)
             resultado = 8;

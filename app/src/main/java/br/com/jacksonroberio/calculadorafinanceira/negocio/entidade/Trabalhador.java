@@ -2,28 +2,34 @@ package br.com.jacksonroberio.calculadorafinanceira.negocio.entidade;
 
 public class Trabalhador {
 
-    private double salario;
+    private Float salario;
 
-    private int dependentes;
+    private Integer dependentes;
 
+    public Trabalhador() {
+    }
 
+    public Trabalhador(float salario, int dependentes) {
+        this.salario = salario;
+        this.dependentes = dependentes;
+    }
 
     /**
      *  Gettres & Setters
      * */
-    public double getSalario() {
+    public Float getSalario() {
         return salario;
     }
 
-    public void setSalario(double salario) {
+    public void setSalario(Float salario) {
         this.salario = salario;
     }
 
-    public int getDependentes() {
+    public Integer getDependentes() {
         return dependentes;
     }
 
-    public void setDependentes(int dependentes) {
+    public void setDependentes(Integer dependentes) {
         this.dependentes = dependentes;
     }
 }
