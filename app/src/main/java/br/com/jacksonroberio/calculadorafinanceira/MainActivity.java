@@ -1,15 +1,27 @@
 package br.com.jacksonroberio.calculadorafinanceira;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import br.com.jacksonroberio.calculadorafinanceira.negocio.entidade.ContraCheque;
 import br.com.jacksonroberio.calculadorafinanceira.negocio.entidade.Trabalhador;
+import br.com.jacksonroberio.calculadorafinanceira.util.listener.ButtonOnClick;
+import br.com.jacksonroberio.calculadorafinanceira.util.listener.EditTextChangedValueDependentes;
+import br.com.jacksonroberio.calculadorafinanceira.util.listener.EditTextChangedValueSalarioBruto;
 
+/**
+ * Activity principal, é a primeira tela que será mostrada ao usuário, nela é capturado o valor do salário juntamente
+ * com a quantidade de dependentes que o usuário tem. Esses valores serão fundamental para geração do gráfico e calculo
+ * dos impostos e salaário liquido.
+ *
+ * @author Jackson Roberio
+ **/
 public class MainActivity extends AppCompatActivity {
 
     private EditText edtSalarioBruto, edtSalarioLiquido, edtDependentes, edtAlqInss, edtAlqIrpf, edtBaseInss, edtBaseIrpf, edtVlInss, edtVlIrpf, edtDeducao;
@@ -26,56 +38,15 @@ public class MainActivity extends AppCompatActivity {
         Trabalhador trb = new Trabalhador(0f, 0);
         contraCheque = new ContraCheque(trb);
 
-
         //Setar o valor do input de entrada do salaário na variável responsável pelos calculos (Trabalhador->Contracheque)
-        edtSalarioBruto.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-               try {
-                    contraCheque.getTrabalhador().setSalario(Float.parseFloat(s.toString()));
-               } catch (Exception e) {
-                   contraCheque.getTrabalhador().setSalario(0f);
-               }
-
-               definirValores();
-            }
-        });
+        edtSalarioBruto.addTextChangedListener(new EditTextChangedValueSalarioBruto(this));
         //Fim: setar valor do input de entrada no salário bruto.
 
         //Setar o valor do input dos dependentes, para poder calcular os valores finais de pagamento.
-        edtDependentes.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        edtDependentes.addTextChangedListener(new EditTextChangedValueDependentes(this));
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                try {
-                    contraCheque.getTrabalhador().setDependentes(Integer.parseInt(s.toString()));
-                } catch (Exception e){
-                    contraCheque.getTrabalhador().setDependentes(0);
-                }
-                definirValores();
-            }
-        });
-        //FIM: setar valores dos dependentes.
-
+        //Levar o usuário para a tela de gráficos;
+        buttonGrafico.setOnClickListener(new ButtonOnClick(this));
 
         definirValores();
     }
@@ -83,9 +54,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void definirValores(){
+        //Valores do INSS
         edtBaseInss.setText(contraCheque.getBaseInssString());
         edtAlqInss.setText(contraCheque.getAlicotaInssString());
         edtVlInss.setText(contraCheque.getInssString());
+
+        //Valores do IRPF
+        edtBaseIrpf.setText(contraCheque.getBaseIRPFString());
+        edtAlqIrpf.setText(contraCheque.getAliquotaIRPFString());
+        edtVlIrpf.setText(contraCheque.getValorIRPFString());
+        edtDeducao.setText(contraCheque.getDeducaoIRPFString());
+
+        //Valores finais
+        edtSalarioLiquido.setText(contraCheque.getSalarioLiquidoString());
     }
 
     private void iniciarVariaveis(){
@@ -100,6 +81,30 @@ public class MainActivity extends AppCompatActivity {
         edtVlIrpf           =  findViewById(R.id.ap_out_vl_irpf);
         edtDeducao          = findViewById(R.id.ap_out_deducao_irpf);
         buttonGrafico       = (Button) findViewById(R.id.ap_button_grafico);
+    }
 
+    //Método invocado ao clicar no botão para visualizar o gráfico.
+    public void irActivityGrafico(){
+        Intent i = new Intent(this, AGrafico.class);
+        startActivity(i);
+    }
+
+    public void mudouValorInputDependentes(String novoValor){
+        try {
+            contraCheque.getTrabalhador().setDependentes(Integer.parseInt(novoValor.toString()));
+        } catch (Exception e){
+            contraCheque.getTrabalhador().setDependentes(0);
+        }
+        definirValores();
+    }
+
+
+    public void mudouValorInputSalarioBruto(String novoValor){
+        try {
+            contraCheque.getTrabalhador().setSalario(Float.parseFloat(novoValor.toString()));
+        } catch (Exception e) {
+            contraCheque.getTrabalhador().setSalario(0f);
+        }
+        definirValores();
     }
 }

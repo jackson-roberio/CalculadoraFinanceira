@@ -3,7 +3,7 @@ package br.com.jacksonroberio.calculadorafinanceira.negocio.entidade.regras;
 /**
 * @author Jackson Roberio
 */
-public class AliquotaInssDefinirPorcentagem {
+public class AliquotaInssDefinePorcentagem {
 
     private static final float OITO_PORCENTO = 1751.82f;
 
