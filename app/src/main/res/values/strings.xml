@@ -17,5 +17,5 @@
     <string name="ap_deducao_irpf">Dedução IRPF</string>
     <string name="ap_vl_irpf">Valor IRPF</string>
     <string name="ap_grafico">Gráfico</string>
-    <string name="c"></string>
+    <string name="ag_relatorio_em_porcentagem">Relatório com valores em porcentagem.</string>
 </resources>

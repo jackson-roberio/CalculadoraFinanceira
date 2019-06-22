@@ -85,8 +85,11 @@ public class MainActivity extends AppCompatActivity {
 
     //Método invocado ao clicar no botão para visualizar o gráfico.
     public void irActivityGrafico(){
-        Intent i = new Intent(this, AGrafico.class);
-        startActivity(i);
+        Intent aGrafico = new Intent(this, AGrafico.class);
+        aGrafico.putExtra("salario", contraCheque.getSalarioLiquido());
+        aGrafico.putExtra("inss", contraCheque.getInss());
+        aGrafico.putExtra("irpf", contraCheque.getValorIRPF());
+        startActivity(aGrafico);
     }
 
     public void mudouValorInputDependentes(String novoValor){

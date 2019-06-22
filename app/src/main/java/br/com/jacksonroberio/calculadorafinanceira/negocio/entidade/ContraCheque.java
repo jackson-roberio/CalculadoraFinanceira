@@ -1,5 +1,7 @@
 package br.com.jacksonroberio.calculadorafinanceira.negocio.entidade;
 
+import java.io.Serializable;
+
 import br.com.jacksonroberio.calculadorafinanceira.negocio.entidade.regras.AliquotaInssDefinePorcentagem;
 import br.com.jacksonroberio.calculadorafinanceira.negocio.entidade.regras.BaseInssDefinirValor;
 import br.com.jacksonroberio.calculadorafinanceira.negocio.entidade.regras.DefineAliquotaEDeducaoIRPF;
@@ -11,7 +13,8 @@ import br.com.jacksonroberio.calculadorafinanceira.negocio.entidade.regras.Defin
  * @see Trabalhador
  * @author Jackson Roberio
  **/
-public class ContraCheque {
+public class ContraCheque  {
+
 
     private Trabalhador trabalhador;
 
